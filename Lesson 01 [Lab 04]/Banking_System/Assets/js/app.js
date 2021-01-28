@@ -1,6 +1,7 @@
 class Account {
-    constructor(balance = 0) {
+    constructor(balance = 0, track = true) {
       this.balance = balance;
+      this.track = track;
     }
     deposit(amount) {
         this.balance += parseInt(amount);
@@ -8,8 +9,10 @@ class Account {
     withdraw(amount) {
         if (this.balance - amount < 50){
             console.log("You can't withdraw " + amount + " birr. because your account has to have a minimum of 50birr.")
+            this.track = false;
         }
         else {
+            this.track = true;
             this.balance -= parseInt(amount);
         }  
     }
@@ -102,7 +105,9 @@ var user2;
     function transfer() {
         input1 = prompt("Enter the amount you want to transfer to the other user: ");
         user1.withdraw(parseInt(input1))
-        user2.deposit(parseInt(input1))
+        if (user1.track == true) {
+            user2.deposit(parseInt(input1))
+        }
         reinput = prompt("If your done type 'quit'. If you want to deposit again type any letter.")
         if (reinput == "quit") {
             re = false;

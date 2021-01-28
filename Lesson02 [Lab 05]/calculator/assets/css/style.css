@@ -1,0 +1,16 @@
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+#container2 {
+    margin: 5rem 30%;
+    font-size: 2rem;
+}
+#container1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.buttons {
+    height: 50px;
+    margin: 5px;
+}
