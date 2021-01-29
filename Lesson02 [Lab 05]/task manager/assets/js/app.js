@@ -113,21 +113,6 @@ function descender() {
 }
 
 
-    // console.log(d)
-    // d.forEach(element => {
-    //     d.forEach(element => {
-            
-    //         e += 1
-    //     });
-    //     c += 1
-    // });
-    // date1 = taskList.children[0].children[0].textContent
-    // date2 = taskList.children[1].children[0].textContent
-    // if (date1 < date2) {
-    //     b = taskList.children[0].innerHTML
-    //     taskList.children[0].innerHTML = taskList.children[1].innerHTML
-    //     taskList.children[1].innerHTML = b
-    // }
 
 function traverse() {
     console.log(taskList.firstChildren)
