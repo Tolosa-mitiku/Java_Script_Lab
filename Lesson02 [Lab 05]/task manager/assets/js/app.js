@@ -75,7 +75,42 @@ function addNewTask(e) {
 
 
 }
+function ascender() {
+    console.log(taskList.children.length)
+    for (let index = 0; index < taskList.children.length; index++) {
+        for (let index2 = 0; index2 < taskList.children.length; index2++) {
+            date1 = taskList.children[index].children[0].textContent
+            date2 = taskList.children[index2].children[0].textContent
+            console.log(date1)
+            console.log(date2)
+            if (date1 < date2) {
+                b = taskList.children[index].innerHTML
+                taskList.children[index].innerHTML = taskList.children[index2].innerHTML
+                taskList.children[index2].innerHTML = b
+            }
+            
+        }
+    }
+}
 
+function descender() {
+    console.log(taskList.children.length)
+    for (let index = 0; index < taskList.children.length; index++) {
+        for (let index2 = 0; index2 < taskList.children.length; index2++) {
+            date1 = taskList.children[index].children[0].textContent
+            date2 = taskList.children[index2].children[0].textContent
+            console.log(date1)
+            console.log(date2)
+            if (date1 > date2) {
+                b = taskList.children[index].innerHTML
+                taskList.children[index].innerHTML = taskList.children[index2].innerHTML
+                taskList.children[index2].innerHTML = b
+            }
+            
+        }
+        
+    }
+}
 
 
     // console.log(d)
