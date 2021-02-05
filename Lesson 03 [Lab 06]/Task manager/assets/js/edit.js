@@ -63,7 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return;
         }
-
+        objectStore = DB.transaction(['tasks'], 'readwrite').objectStore('tasks');
+        objectStore.put({
+            taskname: taskInput.value,
+            date: new Date(),
+            id: id,
+        })
         /* 
         Instruction set to handle Update
 
