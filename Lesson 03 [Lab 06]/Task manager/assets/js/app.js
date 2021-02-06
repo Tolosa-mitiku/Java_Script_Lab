@@ -6,12 +6,55 @@ const taskList = document.querySelector('.collection'); //The UL
 const clearBtn = document.querySelector('.clear-tasks'); //the all task clear button
 
 const reloadIcon = document.querySelector('.fa'); //the reload button at the top navigation 
-
+const sort = document.querySelector('#sort');
+const ascend = document.querySelector('#ascend');
+const descend = document.querySelector('#descend');
 //DB variable 
 
 let DB;
 
 filter.addEventListener('keyup', filtertask);
+ascend.addEventListener('click', ascender);
+descend.addEventListener('click', descender);
+
+function ascender() {
+    console.log(taskList.children.length)
+    for (let index = 0; index < taskList.children.length; index++) {
+        for (let index2 = 0; index2 < taskList.children.length; index2++) {
+            date1 = taskList.children[index].children[0].textContent
+            date2 = taskList.children[index2].children[0].textContent
+            console.log(date1)
+            console.log(date2)
+            if (date1 < date2) {
+                b = taskList.children[index].innerHTML
+                taskList.children[index].innerHTML = taskList.children[index2].innerHTML
+                taskList.children[index2].innerHTML = b
+            }
+            
+        }
+    }
+}
+
+function descender() {
+    console.log(taskList.children.length)
+    for (let index = 0; index < taskList.children.length; index++) {
+        for (let index2 = 0; index2 < taskList.children.length; index2++) {
+            date1 = taskList.children[index].children[0].textContent
+            date2 = taskList.children[index2].children[0].textContent
+            console.log(date1)
+            console.log(date2)
+            if (date1 > date2) {
+                b = taskList.children[index].innerHTML
+                taskList.children[index].innerHTML = taskList.children[index2].innerHTML
+                taskList.children[index2].innerHTML = b
+            }
+            
+        }
+        
+    }
+}
+
+
 
 // Add Event Listener [on Load]
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // createindex: 1) field name 2) keypath 3) options
         objectStore.createIndex('taskname', 'taskname', { unique: false });
-
+        objectStore.createIndex('date', 'date', { unique: false });
         console.log('Database ready and fields created!');
     }
 
@@ -63,13 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // create a new object with the form info
         let newTask = {
             taskname: taskInput.value,
+            date: new Date(),
         }
 
         // Insert the object into the database 
         let transaction = DB.transaction(['tasks'], 'readwrite');
         let objectStore = transaction.objectStore('tasks');
 
-        let request = objectStore.add(newTask);
+        let request = objectStore.put(newTask);
 
         // on success
         request.onsuccess = () => {
@@ -109,7 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.className = 'collection-item';
                 // Create text node and append it 
                 li.appendChild(document.createTextNode(cursor.value.taskname));
-                // Create new element for the link 
+                // Create new element for the link
+                
+                const date = document.createElement("p")
+                date.className = 'dates'
+                date.innerHTML = cursor.value.date;
+                date.style.marginLeft = "30%";
+                date.style.display = "inline";
+                li.appendChild(date);
                 const link = document.createElement('a');
                 // Add class and the x marker for a 
                 link.className = 'delete-item secondary-content';
