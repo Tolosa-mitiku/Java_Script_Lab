@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTask(e) {
         e.preventDefault();
-        // Check empty entry
         if (taskInput.value === '') {
             taskInput.style.borderColor = "red";
 
@@ -69,14 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
             date: new Date(),
             id: id,
         })
-        /* 
-        Instruction set to handle Update
-
-        1. Declare the transaction and object store objects 
-        2. Use the id on put method of index db
-        
-        */
-
         history.back();
     }
 

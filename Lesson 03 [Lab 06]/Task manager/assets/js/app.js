@@ -12,11 +12,14 @@ const descend = document.querySelector('#descend');
 //DB variable 
 
 let DB;
-
+// filter and sort buttons are assigned eventlisteners and are given appropriate functions
 filter.addEventListener('keyup', filtertask);
 ascend.addEventListener('click', ascender);
 descend.addEventListener('click', descender);
 
+
+
+// Ascender sorts the files in ascending order.
 function ascender() {
     console.log(taskList.children.length)
     for (let index = 0; index < taskList.children.length; index++) {
@@ -34,6 +37,7 @@ function ascender() {
         }
     }
 }
+// Descender sorts the files in descending order.
 
 function descender() {
     console.log(taskList.children.length)
