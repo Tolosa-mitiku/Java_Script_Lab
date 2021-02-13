@@ -1,26 +1,73 @@
-// UI Vars 
-const postDiv3 = document.getElementById('thePosts');
+const search = document.querySelector('#search');
+const loader = document.querySelector('.s');
+loader.classList.add('active');
+const sort = document.querySelector('#sort');
+const ascend = document.querySelector('#ascend');
+const descend = document.querySelector('#descend');
+ascend.addEventListener('click', ascender);
+descend.addEventListener('click', descender);
 
+function ascender() {
+  let posts = document.querySelectorAll('.item #bTitle');
+  let item = document.querySelectorAll('.item')
+  for (let index = 0; index < item.length; index++) {
+      for (let index2 = 0; index2 < item.length; index2++) {
+          date1 = item.children[1].children[index].textContent
+          date2 = item.children[1].children[index2].textContent
+          console.log(date1)
+          console.log(date2)
+          if (date1 < date2) {
+              b = item.children[1].children[index].innerHTML
+              item.children[1].children[index].innerHTML = item.children[1].children[index2].innerHTML
+              item.children[1].children[index2].innerHTML = b
+          }
+          
+      }
+  }
+}
+// Descender sorts the files in descending order.
+
+function descender() {
+  let posts = document.querySelectorAll('.item #bTitle');
+  let item = document.querySelectorAll('.item')
+  for (let index = 0; index < item.length; index++) {
+      for (let index2 = 0; index2 < item.length; index2++) {
+          date1 = item.children[1].children[index].textContent
+          date2 = item.children[1].children[index2].textContent
+          console.log(date1)
+          console.log(date2)
+          if (date1 > date2) {
+              b = item.children[1].children[index].innerHTML
+              item.children[1].children[index].innerHTML = item.children[1].children[index2].innerHTML
+              item.children[1].children[index2].innerHTML = b
+          }
+          
+      }
+  }
+}
+
+
+// UI Vars
+const postDiv3 = document.getElementById('thePosts');
+search.addEventListener('keyup', filterTasks);
 //Load Every thing ....
-document.addEventListener("DOMContentLoaded", () => {
-    //load_fromPlaceHolder();
-    loadDataNew();
+document.addEventListener('DOMContentLoaded', () => {
+  //load_fromPlaceHolder();
+  loadDataNew();
 });
 
-
-//load a single customer function 
+//load a single customer function
 function load_fromPlaceHolder() {
-
-    //open the request 
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(function(res) {
-            return res.json(); //return the JSON Promise
-        })
-        .then(function(posts) {
-            //iterate over each post [100 posts]
-            let output = '';
-            posts.forEach(function(post) {
-                output += `
+  //open the request
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(function (res) {
+      return res.json(); //return the JSON Promise
+    })
+    .then(function (posts) {
+      //iterate over each post [100 posts]
+      let output = '';
+      posts.forEach(function (post) {
+        output += `
         
                 <div class="item">
                 <div class="image">
@@ -42,36 +89,32 @@ function load_fromPlaceHolder() {
             </div>
         
         `;
-            });
-            postDiv3.innerHTML = output;
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
-
-
-
+      });
+      postDiv3.innerHTML = output;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 
 async function load_fromPlaceHolder_new() {
+  //open the request
+  let response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
-    //open the request 
-    let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  let data = await response.json();
 
-    let data = await response.json();
-
-    return data;
-
+  return data;
 }
 
 function loadDataNew() {
-    load_fromPlaceHolder_new().then(function(posts) {
-            //iterate over each post [100 posts]
-            let output = '';
-            posts.forEach(function(post) {
-                output += `
+  load_fromPlaceHolder_new()
+    .then(function (posts) {
+      //iterate over each post [100 posts]
+      let output = '';
+      posts.forEach(function (post) {
+        output += `
 
-        <div class="item">
+    <div class="item">
         <div class="image">
             <img src=" https://images.unsplash.com/photo-1499482125586-91609c0b5fd4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80">
         </div>
@@ -91,11 +134,37 @@ function loadDataNew() {
     </div>
 
 `;
-            });
-            postDiv3.innerHTML = output;
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
-
+      });
+      loader.classList.remove('active');
+      postDiv3.innerHTML = output;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
+
+function filterTasks(e) {
+  let posts = document.querySelectorAll('.item #bTitle');
+  posts.forEach((el) => {
+    if (el.textContent.toUpperCase().includes(e.target.value.toUpperCase())) {
+      el.parentElement.parentElement.style.display = 'flex';
+    } else {
+      el.parentElement.parentElement.style.display = 'none';
+    }
+  });
+}
+// function sortIt(direction) {
+
+//     var tasks = Array.from(document.querySelectorAll('#thePosts .item #bTitle')).sort(function (a, b) {
+//       a = a.lastChild.innerHTML;
+//       b = b.lastChild.innerHTML;
+//       if (Number(direction) == 1) {
+//         return a > b ? 1 : a < b ? -1 : 0;
+//       } else {
+//         return a < b ? 1 : a > b ? -1 : 0;
+//       }
+//     });
+
+//     clearAllTask();
+//     taskList.append(...tasks);
+//   }

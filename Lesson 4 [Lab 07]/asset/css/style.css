@@ -1,0 +1,41 @@
+.clock {
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+img {
+    position: absolute;
+    top: -7rem;
+    left: -3rem;
+    width: 21rem;
+
+}
+.hour {
+    position: absolute;
+    top: 4.5rem;
+    left: 7.2rem;
+    height: 3rem;
+    width: 0.5rem;
+    background-color: red;
+    transform-origin: bottom right;
+}
+.minute {
+    position: absolute;
+    top: 2.5rem;
+    left: 7.3rem;
+    height: 5rem;
+    width: 0.3rem;
+    background-color: red;
+    transform-origin: bottom right;
+}
+.second {
+    position: absolute;
+    top: 2rem;
+    left: 7.375rem;
+    height: 5.5rem;
+    width: 0.15rem;
+    background-color: red;
+    transform-origin: bottom right;
+}
