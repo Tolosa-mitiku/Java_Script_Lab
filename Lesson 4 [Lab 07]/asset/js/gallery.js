@@ -10,6 +10,7 @@ async function load_fromPlaceHolder_new() {
     let data = await response.json();
     return data;
 }
+
 function loadDataNew() {
     load_fromPlaceHolder_new().then(function(posts) {
             //iterate over each post [100 posts]
