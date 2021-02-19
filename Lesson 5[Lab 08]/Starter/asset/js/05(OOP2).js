@@ -7,7 +7,7 @@ const PersonObj = {
 }
 
 //2. Create Theon Object using Person Template using Object.create
-    Theon = Object.create(Person)
+    const Theon = Object.create(PersonObj)
 
 //3. Add firstName[Theon] and lastName[Greyjoy] 
     Theon.firstName = "Theon"

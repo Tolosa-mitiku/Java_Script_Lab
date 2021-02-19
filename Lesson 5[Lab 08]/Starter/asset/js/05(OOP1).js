@@ -6,7 +6,7 @@ function Person(firstName, lastName) {
     this.lastName = lastName;
     //2. Create a greeting function returns [use this keyword to get the first and last name]
     this.greeting = function() {
-        console.log("Hi, " + this.firstName + this.lastName);
+        return "Hi, " + this.firstName + this.lastName;
 
     }
     //  ==> Hi , firstName lastName
