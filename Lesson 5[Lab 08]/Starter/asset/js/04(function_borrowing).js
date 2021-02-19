@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     usingCall();
     usingApply();
     usingBind();
+    usingES5();
+    usingES6();
 
 
 });
@@ -84,4 +86,31 @@ function usingBind() {
     //2. Pass bind_demo[as ui_place] , Hi I am ,[as message]
     bind_demo.innerHTML = `${result()}`;
 
+}
+
+function usingES5(){
+    const Sansa = {
+        name: "Sansa",
+        list: ["Wintefell"],
+        display: function(){
+            var self = this
+            return self.list.map(function(value){
+                return `${self.name} Became the queen of ${value}.`
+            });
+        }
+    }
+
+    es5.innerHTML = `${Sansa.display()}`; 
+}
+function usingES6(){
+    const Rob = {
+        name: "Rob",
+        list: ["tyrell"],
+        display: function(){
+            return this.list.map((value)=>{
+                return `${this.name}  was killed by ${value} at the red wedding.`
+            });
+        }
+    }
+    es6.innerHTML = `${Rob.display()}`;
 }
